@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Медицинская карта № 001 — приглашение на свадьбу</title>
+  <meta name="description" content="Приглашение на свадьбу в стиле медицинской карты">
+  <meta property="og:title" content="Медицинская карта № 001">
+  <meta property="og:description" content="Вы приглашены на торжественную выписку пациентов">
+  <meta property="og:image" content="img/1.png">
+  <link rel="preload" href="font/GentlemensScript-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!--
+  ЧТО МЕНЯТЬ ПОД ПАРУ:
+  • Имена жениха/невесты — блоки 2 и 3
+  • Дата свадьбы — блок 4
+  • Место и адрес — блок 5
+  • Срок ответа — блок 10
+  • Тексты на картинках — _исходники/cards.html, потом _исходники/render.sh
+  • Музыка — заменить файл music.mp3
+-->
+
+<!-- БЛОК 1: стартовый экран -->
+
+<section class="start-screen" id="startScreen">
+  <div class="start-screen-inner">
+    <img class="start-screen-img" src="img/1.png" alt="Медицинская карта № 001">
+
+    <button class="start-screen-btn" id="openSiteBtn" type="button" aria-label="Открыть приглашение">
+      <img src="img/2.png" alt="Открыть">
+    </button>
+  </div>
+</section>
+
+<audio id="bgMusic" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" id="musicBtn" type="button" aria-label="Музыка">♪</button>
+
+<div class="site-content" id="siteContent">
+
+<!-- БЛОК 2: жених -->
+
+<section class="block2">
+
+  <img class="block2-top" src="img/3.png" alt="История болезни">
+
+  <div class="block2-bottom-wrap">
+    <img class="block2-img" src="img/4.png" alt="">
+
+    <div class="block2-text">
+      <span class="line line1">Иванов</span>
+      <span class="line line2">Иван</span>
+      <span class="line line3">Иванович</span>
+    </div>
+  </div>
+
+</section>
+
+<!-- БЛОК 3: невеста -->
+
+<section class="block3">
+
+  <div class="block3-top-wrap">
+    <img class="block3-img" src="img/5.png" alt="">
+
+    <div class="block3-text">
+      <span class="line line1">Петрова</span>
+      <span class="line line2">Мария</span>
+      <span class="line line3">Сергеевна</span>
+    </div>
+  </div>
+
+  <img class="block3-bottom" src="img/6.png" alt="Симптомы">
+
+</section>
+
+<!-- БЛОК 4: дата -->
+
+<section class="block4">
+
+  <div class="block4-top-wrap">
+    <img class="block4-img" src="img/7.png" alt="Назначено">
+
+    <div class="block4-text">
+      <span class="block4-line block4-line1">17</span>
+      <span class="block4-line block4-line2">июля</span>
+    </div>
+  </div>
+
+  <img class="block4-bottom" src="img/8.png" alt="">
+
+</section>
+
+<!-- БЛОК 5: место -->
+
+<section class="block5">
+
+  <div class="block5-wrap">
+    <img class="block5-img" src="img/9.png" alt="Место проведения">
+
+    <div class="block5-text">
+      <span class="block5-line">Ресторан «Название»</span>
+      <span class="block5-line2">ул. Примерная, 1, г. Москва</span>
+    </div>
+  </div>
+
+</section>
+
+<!-- БЛОК 6: программа -->
+
+<section class="block6">
+
+  <img class="block6-img" src="img/10.png" alt="График лечебных процедур">
+
+  <img class="block6-bottom" src="img/11.png" alt="">
+
+</section>
+
+<!-- БЛОК 7: дресс-код -->
+
+<section class="block7">
+
+  <img class="block7-img" src="img/12.png" alt="Дресс-код">
+
+  <img class="block7-bottom" src="img/13.png" alt="Цвета">
+
+</section>
+
+<!-- БЛОК 8: подарки -->
+
+<section class="block8">
+
+  <img class="block8-img" src="img/14.png" alt="Рекомендации по подаркам">
+
+  <div class="block8-row">
+    <img class="block8-left" src="img/15.png" alt="">
+    <img class="block8-right" src="img/16.png" alt="">
+  </div>
+
+  <img class="block8-bottom" src="img/17.png" alt="">
+
+</section>
+
+<!-- БЛОК 9: без детей -->
+
+<section class="block9">
+  <img class="block9-img" src="img/18.png" alt="Дополнительные предписания">
+  <img class="block9-img2" src="img/19.png" alt="">
+</section>
+
+<!-- БЛОК 10: анкета -->
+
+<section class="block10">
+
+  <div class="block10-top-wrap">
+    <img class="block10-img" src="img/20.png" alt="Запись на приём">
+
+    <div class="block10-text">
+      <span class="block10-line block10-line1">31</span>
+      <span class="block10-line block10-line2">мая</span>
+    </div>
+  </div>
+
+  <form id="block10Form" class="block10-form"
+        action="https://api.web3forms.com/submit"
+        method="POST">
+
+    <input type="hidden" name="access_key"
+           value="feb15010-13d7-41cf-ba00-a917a2ac1a30">
+    <input type="hidden" name="subject" value="Ответ на приглашение (медицинская карта)">
+
+    <input
+      class="block10-input"
+      type="text"
+      name="name"
+      placeholder="Введите ваше имя"
+      autocomplete="name"
+      required
+    >
+
+    <div class="block10-check-wrap">
+      <label class="block10-check-row">
+        <input
+          class="block10-checkbox"
+          type="checkbox"
+          name="presence"
+          value="Да, буду присутствовать"
+          required
+        >
+        <img class="block10-check-img"
+             src="img/21.png" alt="Подтверждаю присутствие">
+      </label>
+    </div>
+
+    <button class="block10-submit" type="submit">
+      <img class="block10-submit-img" src="img/22.png" alt="Отправить">
+    </button>
+
+  </form>
+
+</section>
+
+<!-- БЛОК 11: заключение -->
+
+<section class="block11">
+
+  <img class="block11-img" src="img/23.png" alt="Заключение">
+
+  <div class="block11-stage">
+    <img class="block11-photo23" src="img/24.png" alt="">
+    <img class="block11-photo24" src="img/25.png" alt="">
+  </div>
+
+  <img class="block11-photo25" src="img/26.png" alt="">
+
+</section>
+
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>

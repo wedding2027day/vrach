@@ -1,0 +1,631 @@
+@font-face {
+  font-family: 'GentlemensScript';
+  src: url('font/GentlemensScript-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Courier10';
+  src: url('font/ofont.ru_Courier10 Win95BT.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Общие настройки */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --ink: #141414;
+  --blue: #1f4fa3;
+  --page: 480px;          /* ширина «листа» на компьютере */
+}
+
+html, body {
+  min-height: 100%;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #eef1f4;
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* Лист: на телефоне на всю ширину, на компьютере — по центру.
+   Все размеры текста поверх картинок считаются в cqw (% ширины листа),
+   поэтому надписи совпадают с картинками на любом экране. */
+.site-content {
+  display: none;
+  width: 100%;
+  max-width: var(--page);
+  margin: 0 auto;
+  background: #fff;
+  container-type: inline-size;
+  box-shadow: 0 0 40px rgba(0, 0, 0, .06);
+}
+
+.site-content.show {
+  display: block;
+}
+
+section {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* общий стиль надписей поверх картинок */
+.line,
+.block4-line,
+.block10-line {
+  position: absolute;
+  font-family: 'GentlemensScript', cursive;
+  color: var(--ink);
+  white-space: nowrap;
+  line-height: 1;
+  translate: -50% -50%;   /* центр надписи = точка top/left */
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes fadeText {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* БЛОК 1: стартовый экран */
+
+.start-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.start-screen-inner {
+  width: 100%;
+  max-width: var(--page);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  animation: startIn 1s ease both;
+}
+
+.start-screen-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.start-screen-btn {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  animation: pulse 2.2s ease-in-out 1s infinite;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.start-screen-btn img {
+  display: block;
+  width: 200px;
+  max-width: 60vw;
+  height: auto;
+}
+
+.start-screen-btn:active img {
+  transform: scale(.94);
+}
+
+@keyframes startIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50%      { transform: scale(1.06) rotate(-1deg); }
+}
+
+.start-screen.hide {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .8s ease, visibility 0s linear .8s;
+}
+
+/* кнопка музыки */
+.music-btn {
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  z-index: 9000;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--blue);
+  background: #fff;
+  color: var(--blue);
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .12);
+}
+
+.music-btn.show { display: block; }
+.music-btn.muted { opacity: .45; text-decoration: line-through; }
+
+/* БЛОК 2: жених */
+
+.block2-top {
+  display: block;
+  margin: 10px auto;
+  max-width: 80%;
+  height: auto;
+}
+
+.block2-bottom-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.block2-img {
+  width: 100%;
+  display: block;
+  opacity: 0;
+  animation: fadeInImg 1.2s ease forwards;
+}
+
+.block2-text {
+  position: absolute;
+  inset: 0;
+}
+
+/* позиции — центры клеточек на img/4.png */
+.block2 .line { font-size: 8.5cqw; left: 17%; }
+.block2 .line1 { top: 26.6%; animation: fadeText .8s ease forwards 1.2s; }
+.block2 .line2 { top: 44.4%; animation: fadeText .8s ease forwards 1.8s; }
+.block2 .line3 { top: 60.0%; animation: fadeText .8s ease forwards 2.4s; }
+
+@keyframes fadeInImg {
+  to { opacity: 1; }
+}
+
+/* БЛОК 3: невеста */
+
+.block3-top-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.block3-img {
+  width: 100%;
+  display: block;
+}
+
+.block3-text {
+  position: absolute;
+  inset: 0;
+}
+
+/* позиции — центры клеточек на img/5.png */
+.block3 .line { font-size: 8.5cqw; left: 17%; }
+.block3 .line1 { top: 26.0%; animation: fadeText .8s ease forwards 3.3s; }
+.block3 .line2 { top: 52.0%; animation: fadeText .8s ease forwards 3.9s; }
+.block3 .line3 { top: 76.0%; animation: fadeText .8s ease forwards 4.5s; }
+
+.block3-bottom {
+  width: 100%;
+  display: block;
+}
+
+/* БЛОК 4: дата */
+
+.block4-top-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.block4-img {
+  width: 100%;
+  display: block;
+}
+
+.block4-text {
+  position: absolute;
+  inset: 0;
+}
+
+/* позиции — пропуски “__”____ на img/7.png */
+.block4-line { font-size: 7cqw; top: 64%; }
+.block4-line1 { left: 56%; }
+.block4-line2 { left: 77%; }
+
+.block4.show .block4-line { animation: fadeUp .8s ease forwards; }
+.block4.show .block4-line1 { animation-delay: .2s; }
+.block4.show .block4-line2 { animation-delay: .6s; }
+
+.block4-bottom {
+  width: 100%;
+  display: block;
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.block4.show .block4-bottom {
+  animation: slideIn 1s ease forwards 1s;
+}
+
+@keyframes slideIn {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* БЛОК 5: место */
+
+.block5-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.block5-img {
+  width: 100%;
+  display: block;
+}
+
+.block5-text {
+  position: absolute;
+  inset: 0;
+}
+
+.block5-line,
+.block5-line2 {
+  position: absolute;
+  left: 50%;
+  width: 88%;
+  margin-left: -44%;
+  text-align: center;
+  font-family: 'GentlemensScript', cursive;
+  color: var(--ink);
+  line-height: 1.1;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* над линиями на img/9.png */
+.block5-line  { font-size: 7.5cqw; bottom: 71.3%; }
+.block5-line2 { font-size: 5.2cqw; bottom: 60.8%; }
+
+.block5.show .block5-line,
+.block5.show .block5-line2 {
+  animation: fadeUp .8s ease forwards;
+}
+
+.block5.show .block5-line2 { animation-delay: .4s; }
+
+/* БЛОК 6: программа + баночка с кольцами */
+
+.block6 { position: relative; }
+
+.block6-img {
+  width: 100%;
+  display: block;
+}
+
+.block6-bottom {
+  position: relative;
+  display: block;
+  width: 50%;
+  left: 50%;
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.block6.show .block6-bottom {
+  animation: slideCenter 1s ease forwards;
+}
+
+@keyframes slideCenter {
+  to { opacity: 1; transform: translateX(-50%); }
+}
+
+/* БЛОК 7: дресс-код */
+
+.block7-img {
+  width: 100%;
+  display: block;
+}
+
+.block7-bottom {
+  position: relative;
+  display: block;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-150%);
+  opacity: 0;
+}
+
+.block7.show .block7-bottom {
+  animation: slideFromLeft 1s ease forwards;
+}
+
+@keyframes slideFromLeft {
+  to { opacity: 1; transform: translateX(-50%); }
+}
+
+/* БЛОК 8: подарки */
+
+.block8-img {
+  width: 100%;
+  display: block;
+}
+
+.block8-row {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.block8-left,
+.block8-right {
+  width: 50%;
+  position: relative;
+  opacity: 0;
+}
+
+.block8-left  { transform: translateX(-150%); }
+.block8-right { transform: translateX(150%); }
+
+.block8.show .block8-left,
+.block8.show .block8-right {
+  animation: slideBack 1s ease forwards;
+}
+
+.block8-bottom {
+  width: 100%;
+  display: block;
+  margin-top: 20px;
+}
+
+@keyframes slideBack {
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* БЛОК 9: без детей */
+
+.block9-img {
+  width: 100%;
+  display: block;
+}
+
+.block9-img2 {
+  display: block;
+  width: 50%;
+  height: auto;
+  margin-left: auto;
+  margin-right: 0;
+  opacity: 0;
+  transform: translateX(150%);
+}
+
+.block9.show .block9-img2 {
+  animation: slideBack .5s ease-out .3s forwards;
+}
+
+/* БЛОК 10: анкета */
+
+.block10 { background: #fff; }
+
+.block10-top-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.block10-img {
+  width: 100%;
+  display: block;
+}
+
+.block10-text {
+  position: absolute;
+  inset: 0;
+}
+
+/* позиции — пропуски на img/20.png */
+.block10-line { font-size: 7cqw; top: 79%; }
+.block10-line1 { left: 18.8%; }
+.block10-line2 { left: 36%; }
+
+.block10.show .block10-line1 { animation: fadeText .8s ease forwards .2s; }
+.block10.show .block10-line2 { animation: fadeText .8s ease forwards .8s; }
+
+.block10-form {
+  width: 100%;
+  padding: 20px 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.block10-input {
+  width: 90%;
+  margin: 0 auto 24px;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 1px solid #000;
+  border-radius: 0;
+  outline: none;
+  background: transparent;
+  font-family: 'Courier10', 'Courier New', monospace;
+  font-size: 17px;
+  color: #000;
+}
+
+.block10-input:focus {
+  border-bottom-color: var(--blue);
+}
+
+.block10-check-wrap {
+  width: 90%;
+  margin: 0 auto 24px;
+}
+
+.block10-check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.block10-checkbox {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  margin-top: 2px;
+  accent-color: var(--blue);
+  flex-shrink: 0;
+}
+
+.block10-check-img {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+}
+
+.block10-submit {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: transparent;
+  padding: 10px 0 0;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+
+.block10-submit:disabled {
+  opacity: .5;
+  cursor: wait;
+}
+
+.block10-submit-img {
+  display: block;
+  width: 200px;
+  max-width: 80%;
+  height: auto;
+}
+
+.block10-status {
+  width: 90%;
+  margin: 14px auto 0;
+  font-family: 'Courier10', 'Courier New', monospace;
+  font-size: 15px;
+  text-align: center;
+  min-height: 1em;
+}
+
+.block10-status.ok  { color: var(--blue); }
+.block10-status.err { color: #c0392b; }
+
+/* БЛОК 11: заключение, молоточек, печать, скорая */
+
+.block11 { position: relative; }
+
+.block11-img {
+  width: 100%;
+  display: block;
+}
+
+.block11-stage {
+  position: relative;
+  width: 100%;
+  height: min(68vw, 326px);   /* запасной вариант для старых браузеров */
+  height: 68cqw;
+  overflow: hidden;
+}
+
+/* молоточек: стучит и уходит вверх */
+.block11-photo23 {
+  position: absolute;
+  left: 42%;
+  top: 4%;
+  width: 44%;
+  opacity: 0;
+  z-index: 10;
+  transform-origin: 85% 80%;
+}
+
+/* печать */
+.block11-photo24 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 46%;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.6);
+}
+
+/* скорая с молодожёнами */
+.block11-photo25 {
+  display: block;
+  width: 64%;
+  margin: 0 0 30px 6%;
+  opacity: 0;
+  transform: translateX(160%);
+}
+
+.block11.show .block11-photo23 {
+  animation: block11Photo23 1.8s ease forwards;
+}
+
+.block11.show .block11-photo24 {
+  animation: block11Photo24 .45s cubic-bezier(.3, 1.6, .5, 1) forwards 1.05s;
+}
+
+.block11.show .block11-photo25 {
+  animation: block11Photo25 3.5s ease-in-out forwards 1.6s;
+}
+
+@keyframes block11Photo23 {
+  0%   { opacity: 0; transform: rotate(0deg) translate(80px, 0); }
+  20%  { opacity: 1; transform: rotate(0deg) translate(0, 0); }
+  55%  { opacity: 1; transform: rotate(-20deg) translate(-10px, 0); }
+  100% { opacity: 1; transform: rotate(50deg) translate(20px, -35px); }
+}
+
+@keyframes block11Photo24 {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(1.6); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes block11Photo25 {
+  0%   { opacity: 1; transform: translateX(160%); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* для тех, кто отключил анимации в системе */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-delay: 0s !important;
+  }
+}
